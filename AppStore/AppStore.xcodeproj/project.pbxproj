@@ -14,6 +14,8 @@
 		D89697491D87F8EC00659030 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89697471D87F8EC00659030 /* LaunchScreen.storyboard */; };
 		D89697541D87F8EC00659030 /* AppStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89697531D87F8EC00659030 /* AppStoreTests.swift */; };
 		D896975F1D87F8EC00659030 /* AppStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896975E1D87F8EC00659030 /* AppStoreUITests.swift */; };
+		D8CE440C1E2F402600B796F7 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE440B1E2F402600B796F7 /* SecondViewController.swift */; };
+		D8CE440E1E2F45A600B796F7 /* ThirdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE440D1E2F45A600B796F7 /* ThirdController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		D896975A1D87F8EC00659030 /* AppStoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppStoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D896975E1D87F8EC00659030 /* AppStoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreUITests.swift; sourceTree = "<group>"; };
 		D89697601D87F8EC00659030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D8CE440B1E2F402600B796F7 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		D8CE440D1E2F45A600B796F7 /* ThirdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,8 @@
 				D89697451D87F8EC00659030 /* Assets.xcassets */,
 				D89697471D87F8EC00659030 /* LaunchScreen.storyboard */,
 				D896974A1D87F8EC00659030 /* Info.plist */,
+				D8CE440B1E2F402600B796F7 /* SecondViewController.swift */,
+				D8CE440D1E2F45A600B796F7 /* ThirdController.swift */,
 			);
 			path = AppStore;
 			sourceTree = "<group>";
@@ -193,6 +199,7 @@
 				TargetAttributes = {
 					D896973A1D87F8EC00659030 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 46A8679957;
 						LastSwiftMigration = 0800;
 					};
 					D896974E1D87F8EC00659030 = {
@@ -259,8 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8CE440C1E2F402600B796F7 /* SecondViewController.swift in Sources */,
 				D89697411D87F8EC00659030 /* ViewController.swift in Sources */,
 				D896973F1D87F8EC00659030 /* AppDelegate.swift in Sources */,
+				D8CE440E1E2F45A600B796F7 /* ThirdController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +411,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = AppStore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -415,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 46A8679957;
 				INFOPLIST_FILE = AppStore/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
