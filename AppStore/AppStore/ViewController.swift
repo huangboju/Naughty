@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         navigationItem.title = "知乎（scrollViewDidScroll）"
         tableView.contentInset.top = 140
         tableView.scrollIndicatorInsets.top = 130
+        
         view.addSubview(tableView)
         view.addSubview(headerView)
     }
@@ -47,12 +48,16 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.text = indexPath.row.description
+        cell.textLabel?.text = "动态头部"
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y = scrollView.contentOffset.y
         headerView.frame.origin.y = 64 - 204 - max(y, -204)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        navigationController?.pushViewController(ResizeTableHeaderViewAnimatedController(), animated: true)
     }
 }
 

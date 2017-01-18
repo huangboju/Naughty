@@ -16,6 +16,7 @@
 		D896975F1D87F8EC00659030 /* AppStoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896975E1D87F8EC00659030 /* AppStoreUITests.swift */; };
 		D8CE440C1E2F402600B796F7 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE440B1E2F402600B796F7 /* SecondViewController.swift */; };
 		D8CE440E1E2F45A600B796F7 /* ThirdController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE440D1E2F45A600B796F7 /* ThirdController.swift */; };
+		D8CE44101E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE440F1E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		D89697601D87F8EC00659030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D8CE440B1E2F402600B796F7 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		D8CE440D1E2F45A600B796F7 /* ThirdController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdController.swift; sourceTree = "<group>"; };
+		D8CE440F1E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizeTableHeaderViewAnimatedController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				D896974A1D87F8EC00659030 /* Info.plist */,
 				D8CE440B1E2F402600B796F7 /* SecondViewController.swift */,
 				D8CE440D1E2F45A600B796F7 /* ThirdController.swift */,
+				D8CE440F1E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift */,
 			);
 			path = AppStore;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8CE440C1E2F402600B796F7 /* SecondViewController.swift in Sources */,
+				D8CE44101E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift in Sources */,
 				D89697411D87F8EC00659030 /* ViewController.swift in Sources */,
 				D896973F1D87F8EC00659030 /* AppDelegate.swift in Sources */,
 				D8CE440E1E2F45A600B796F7 /* ThirdController.swift in Sources */,
