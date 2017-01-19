@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutoResizingHeaderController: UITableViewController {
+class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     fileprivate lazy var headerView: HeaderView = {
         let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 220), target: self, action: #selector(addMoreText), secondAction: #selector(makeThisTaller))
@@ -19,12 +19,22 @@ class AutoResizingHeaderController: UITableViewController {
     override func viewDidLayoutSubviews() {
         // viewDidLayoutSubviews is called when labels change.
         super.viewDidLayoutSubviews()
-        sizeHeaderToFit(tableView)
+//        sizeHeaderToFit(tableView)
     }
     
+    fileprivate lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: self.view.frame)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        return tableView
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(tableView)
+
         tableView.tableHeaderView = headerView
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -36,21 +46,26 @@ class AutoResizingHeaderController: UITableViewController {
     }
     
     func makeThisTaller() {
-        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tableView.beginUpdates()
+            self.headerView.makeThisTallerHeight.constant += 20
+            self.sizeHeaderToFit(self.tableView)
+            self.tableView.endUpdates()
+        })
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
     }
 }

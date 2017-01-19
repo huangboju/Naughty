@@ -13,13 +13,15 @@ class HeaderView: UIView {
     static let width = UIScreen.main.bounds.width
     static let padding: CGFloat = 15
     
+    var makeThisTallerHeight: NSLayoutConstraint!
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: padding, y: 20, width: width - 2 * padding, height: 22))
         label.text = "Add Resizing Header"
         label.font = UIFont.systemFont(ofSize: 18)
         return label
     }()
-    
+
     lazy var textLabel: UILabel = {
         let label = UILabel()
         return label
@@ -64,7 +66,6 @@ class HeaderView: UIView {
         let bottom = NSLayoutConstraint(item: textLabel, attribute: .bottom, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1.0, constant: -20)
         textLabel.superview!.addConstraints([textLabelLeft, textLabelTop, bottom])
 
-        
         button.translatesAutoresizingMaskIntoConstraints = false
         let buttonTop = top(button)(textLabel)
         let buttonRight = right(button)(self)
@@ -74,9 +75,11 @@ class HeaderView: UIView {
 
 
         secondButton.translatesAutoresizingMaskIntoConstraints = false
+        makeThisTallerHeight = NSLayoutConstraint(item: secondButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 34)
         let secondButtonTop = top(secondButton)(button)
         let secondButtonRight = right(secondButton)(self)
         let secondButtonLeft = left(secondButton)(self)
+        secondButton.addConstraints([makeThisTallerHeight])
         secondButton.superview!.addConstraints([secondButtonTop, secondButtonRight, secondButtonLeft])
 
         secondButton.addTarget(target, action: secondAction, for: .touchUpInside)
