@@ -18,7 +18,7 @@ class SecondViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         navigationItem.title = "APP Store"
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")

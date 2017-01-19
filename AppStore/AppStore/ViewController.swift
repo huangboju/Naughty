@@ -30,7 +30,7 @@ class ViewController: UIViewController {
         navigationItem.title = "知乎（scrollViewDidScroll）"
         tableView.contentInset.top = 140
         tableView.scrollIndicatorInsets.top = 130
-        
+
         view.addSubview(tableView)
         view.addSubview(headerView)
     }

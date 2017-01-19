@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class HeaderView: UIView {
     
@@ -15,16 +16,18 @@ class HeaderView: UIView {
     
     var makeThisTallerHeight: NSLayoutConstraint!
     
-    private lazy var titleLabel: UILabel = {
-        let label = UILabel(frame: CGRect(x: padding, y: 20, width: width - 2 * padding, height: 22))
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
         label.text = "Add Resizing Header"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         return label
     }()
 
     lazy var textLabel: UILabel = {
-        let label = UILabel()
-        return label
+        let textLabel = UILabel()
+        textLabel.text = "This header can dynamically resize according to its contents."
+        textLabel.numberOfLines = 0
+        return textLabel
     }()
     
     private lazy var button: UIButton = {
@@ -34,7 +37,7 @@ class HeaderView: UIView {
         return button
     }()
     
-    private lazy var secondButton: UIButton = {
+    lazy var secondButton: UIButton = {
         let button = UIButton()
         button.setTitle("Make This Taller", for: .normal)
         button.backgroundColor = UIColor(red: 1, green: 182 / 255, blue: 193 / 255, alpha: 1)
@@ -49,38 +52,40 @@ class HeaderView: UIView {
         addSubview(button)
         addSubview(secondButton)
         
-        
-        let top = curry { (item: UIView, toItem: UIView) in NSLayoutConstraint(item: item, attribute: .top, relatedBy: .equal, toItem: toItem, attribute: .bottom, multiplier: 1.0, constant: 20) }
-        let width = curry { (item: UIView) in NSLayoutConstraint(item: item, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: HeaderView.width - 2 * HeaderView.padding) }
-        let left = curry { (item: UIView, toItem: UIView) in NSLayoutConstraint(item: item, attribute: .left, relatedBy: .equal, toItem: toItem, attribute: .left, multiplier:1.0, constant: 20) }
-        let right = curry { (item: UIView, toItem: UIView) in NSLayoutConstraint(item: item, attribute: .right, relatedBy: .equal, toItem: toItem, attribute: .right, multiplier: 1.0, constant: -20) }
+        titleLabel.backgroundColor = UIColor.red
+        titleLabel.snp.makeConstraints { make in
+            make.leading.top.equalTo(self).offset(30)
+            make.trailing.equalTo(self)
+        }
 
+        textLabel.snp.makeConstraints { make in
+            make.leading.trailing.equalTo(titleLabel)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
+            make.bottom.equalTo(button.snp.top).offset(-20)
+        }
 
-        textLabel.text = "This header can dynamically resize according to its contents."
-        textLabel.numberOfLines = 0
-        textLabel.translatesAutoresizingMaskIntoConstraints = false
-        let textLabelWidth = width(textLabel)
-        textLabel.addConstraints([textLabelWidth])
-        let textLabelLeft = left(textLabel)(self)
-        let textLabelTop = top(textLabel)(titleLabel)
-        let bottom = NSLayoutConstraint(item: textLabel, attribute: .bottom, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1.0, constant: -20)
-        textLabel.superview!.addConstraints([textLabelLeft, textLabelTop, bottom])
-
-        button.translatesAutoresizingMaskIntoConstraints = false
-        let buttonTop = top(button)(textLabel)
-        let buttonRight = right(button)(self)
-        let buttonLeft = left(button)(self)
-        button.superview!.addConstraints([buttonTop, buttonLeft, buttonRight])
         button.addTarget(target, action: action, for: .touchUpInside)
-
-
-        secondButton.translatesAutoresizingMaskIntoConstraints = false
-        makeThisTallerHeight = NSLayoutConstraint(item: secondButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 0.0, constant: 34)
-        let secondButtonTop = top(secondButton)(button)
-        let secondButtonRight = right(secondButton)(self)
-        let secondButtonLeft = left(secondButton)(self)
-        secondButton.addConstraints([makeThisTallerHeight])
-        secondButton.superview!.addConstraints([secondButtonTop, secondButtonRight, secondButtonLeft])
+        button.snp.makeConstraints { make in
+            make.leading.equalTo(titleLabel.snp.leading)
+            make.height.equalTo(34)
+            make.width.equalTo(HeaderView.width - 60)
+        }
+        
+        
+        secondButton.snp.makeConstraints { make in
+            make.leading.equalTo(titleLabel.snp.leading)
+            make.height.equalTo(34)
+            make.width.equalTo(HeaderView.width - 60)
+            make.top.equalTo(button.snp.bottom).offset(20)
+            make.bottom.equalTo(self.snp.bottom).offset(-20)
+        }
+        
+        secondButton.constraints.forEach {
+            if $0.firstAttribute == .height {
+                makeThisTallerHeight = $0
+            }
+        }
+        
 
         secondButton.addTarget(target, action: secondAction, for: .touchUpInside)
     }

@@ -11,7 +11,7 @@ import UIKit
 class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     fileprivate lazy var headerView: HeaderView = {
-        let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 220), target: self, action: #selector(addMoreText), secondAction: #selector(makeThisTaller))
+        let headerView = HeaderView(frame: .zero, target: self, action: #selector(addMoreText), secondAction: #selector(makeThisTaller))
         headerView.backgroundColor = UIColor.cyan
         return headerView
     }()
@@ -19,7 +19,7 @@ class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UIT
     override func viewDidLayoutSubviews() {
         // viewDidLayoutSubviews is called when labels change.
         super.viewDidLayoutSubviews()
-//        sizeHeaderToFit(tableView)
+        sizeHeaderToFit(tableView)
     }
     
     fileprivate lazy var tableView: UITableView = {
@@ -37,14 +37,25 @@ class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UIT
 
         tableView.tableHeaderView = headerView
 
+        
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+
+        let leading = NSLayoutConstraint(item: headerView.titleLabel, attribute: .leading, relatedBy: .equal, toItem: headerView.superview!, attribute: .leading, multiplier: 1.0, constant: 30)
+
+        let top = NSLayoutConstraint(item: headerView.titleLabel, attribute: .top, relatedBy: .equal, toItem: headerView.superview!, attribute: .top, multiplier: 1.0, constant: 30)
+
+        let bottom = NSLayoutConstraint(item: headerView.superview!, attribute: .bottom, relatedBy: .greaterThanOrEqual, toItem: headerView.secondButton, attribute: .bottom, multiplier: 1.0, constant: 30)
+        headerView.superview?.addConstraints([leading, top, bottom])
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
     }
-    
+
     func addMoreText() {
-        headerView.textLabel.text! += "\n\(headerView.textLabel.text!)"
+        headerView.textLabel.text! += "\nThis header can dynamically resize according to its contents."
     }
-    
+
     func makeThisTaller() {
         UIView.animate(withDuration: 0.3, animations: {
             self.tableView.beginUpdates()
@@ -53,7 +64,7 @@ class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UIT
             self.tableView.endUpdates()
         })
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
