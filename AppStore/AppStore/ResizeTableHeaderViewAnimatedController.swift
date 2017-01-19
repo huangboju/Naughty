@@ -48,8 +48,8 @@ class ResizeTableHeaderViewAnimatedController: UITableViewController {
             tableView.endUpdates()
             UIView.commitAnimations()
         }
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isShowing ? .trash : .add, target: self, action: #selector(showHeaderView))
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: isShowing ? .add : .trash, target: self, action: #selector(showHeaderView))
     }
 
     override func didReceiveMemoryWarning() {

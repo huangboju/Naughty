@@ -6,6 +6,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    let controllers: [UIViewController.Type] = [
+        AutoResizingHeaderController.self,
+        ResizeTableHeaderViewAnimatedController.self
+    ]
+    
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.frame)
         tableView.delegate = self
@@ -37,8 +42,13 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 10
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return controllers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -48,7 +58,7 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.textLabel?.text = "动态头部"
+        cell.textLabel?.text = "\(controllers[indexPath.row].classForCoder())"
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -57,7 +67,6 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(ResizeTableHeaderViewAnimatedController(), animated: true)
+        navigationController?.pushViewController(controllers[indexPath.row].init(), animated: true)
     }
 }
-
