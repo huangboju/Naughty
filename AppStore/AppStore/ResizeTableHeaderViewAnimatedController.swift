@@ -29,7 +29,7 @@ class ResizeTableHeaderViewAnimatedController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showHeaderView))
     }
 
-    func showHeaderView() {
+    @objc func showHeaderView() {
         let newHeight: CGFloat = isShowing ? 130 : 0
 
         if animated {
@@ -78,7 +78,7 @@ class ResizeTableHeaderViewAnimatedController: UITableViewController {
         }
     }
 
-    func valueChange(sender: UISwitch) {
+    @objc func valueChange(sender: UISwitch) {
         animated = sender.isOn
     }
 }

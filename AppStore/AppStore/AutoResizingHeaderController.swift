@@ -52,11 +52,11 @@ class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UIT
         
     }
 
-    func addMoreText() {
+    @objc func addMoreText() {
         headerView.textLabel.text! += "\nThis header can dynamically resize according to its contents."
     }
 
-    func makeThisTaller() {
+    @objc func makeThisTaller() {
         UIView.animate(withDuration: 0.3, animations: {
             self.tableView.beginUpdates()
             self.headerView.makeThisTallerHeight.constant += 20
