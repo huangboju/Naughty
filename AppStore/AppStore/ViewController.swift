@@ -8,7 +8,8 @@ class ViewController: UIViewController {
     
     let controllers: [UIViewController.Type] = [
         AutoResizingHeaderController.self,
-        ResizeTableHeaderViewAnimatedController.self
+        ResizeTableHeaderViewAnimatedController.self,
+        SearchTableViewController.self
     ]
     
     fileprivate lazy var tableView: UITableView = {
@@ -30,14 +31,8 @@ class ViewController: UIViewController {
         navigationItem.title = "知乎（scrollViewDidScroll）"
         tableView.contentInset.top = 140
         tableView.scrollIndicatorInsets.top = 130
-
         view.addSubview(tableView)
         view.addSubview(headerView)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
@@ -64,6 +59,12 @@ extension ViewController: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let y = scrollView.contentOffset.y
         headerView.frame.origin.y = 64 - 204 - max(y, -204)
+    }
+
+    func maxYRelative(to superview: UIView?) -> CGFloat {
+        let maxEdge = CGPoint(x: 0, y: view.bounds.height)
+        let normalizedMaxEdge = superview?.convert(maxEdge, from: view) ?? .zero
+        return normalizedMaxEdge.y
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -64,12 +64,6 @@ class AutoResizingHeaderController: UIViewController, UITableViewDataSource, UIT
             self.tableView.endUpdates()
         })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     // MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,7 +85,6 @@ extension UIViewController {
         if let headerView = tableView.tableHeaderView {
             let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
             headerView.frame.size.height = height
-            tableView.tableHeaderView = headerView
             headerView.setNeedsLayout()
             headerView.layoutIfNeeded()
         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE1C79ED2102DC80009C3CBA /* SearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C79EC2102DC80009C3CBA /* SearchTableViewController.swift */; };
 		D896973F1D87F8EC00659030 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D896973E1D87F8EC00659030 /* AppDelegate.swift */; };
 		D89697411D87F8EC00659030 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89697401D87F8EC00659030 /* ViewController.swift */; };
 		D89697441D87F8EC00659030 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D89697421D87F8EC00659030 /* Main.storyboard */; };
@@ -56,6 +57,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BE1C79EC2102DC80009C3CBA /* SearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewController.swift; sourceTree = "<group>"; };
 		D896973B1D87F8EC00659030 /* AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D896973E1D87F8EC00659030 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D89697401D87F8EC00659030 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				D8CE440F1E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift */,
 				D8CE44111E2F986400B796F7 /* HeaderView.swift */,
 				D8CE44131E2F9D1400B796F7 /* AutoResizingHeaderController.swift */,
+				BE1C79EC2102DC80009C3CBA /* SearchTableViewController.swift */,
 			);
 			path = AppStore;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8CE440C1E2F402600B796F7 /* SecondViewController.swift in Sources */,
+				BE1C79ED2102DC80009C3CBA /* SearchTableViewController.swift in Sources */,
 				D8CE44121E2F986400B796F7 /* HeaderView.swift in Sources */,
 				D8CE44101E2F675F00B796F7 /* ResizeTableHeaderViewAnimatedController.swift in Sources */,
 				D8CE44161E30554400B796F7 /* Curry.swift in Sources */,
