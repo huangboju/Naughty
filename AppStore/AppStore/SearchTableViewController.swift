@@ -10,7 +10,11 @@ import UIKit
 
 class SearchTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private let blueViewY: CGFloat = 20
+    var totalHeight: CGFloat {
+        return blueViewHeight + redViewHeight + greenViewHeight + blueViewY
+    }
+    
+    private let blueViewY: CGFloat = 0
     private let blueViewHeight: CGFloat = 120
 
     private lazy var blueView: UIView = {
@@ -18,14 +22,11 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         blueView.backgroundColor = .blue
         return blueView
     }()
-    
+
     private var redViewY: CGFloat {
         return blueViewY + blueViewHeight
     }
     private let redViewHeight: CGFloat = 80
-    private var redViewOffsetY: CGFloat {
-        return redViewY + redViewHeight
-    }
 
     private lazy var redView: UIView = {
         let blueView = UIView(frame: CGRect(x: 0, y: redViewY, width: self.view.frame.width, height: redViewHeight))
@@ -38,9 +39,6 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         return redViewY + redViewHeight
     }
     private let greenViewHeight: CGFloat = 40
-    private var greenViewOffsetY: CGFloat {
-        return redViewY + redViewHeight
-    }
     private lazy var greenView: UIView = {
         let greenView = UIView(frame: CGRect(x: 0, y: greenViewY, width: self.view.frame.width, height: greenViewHeight))
         greenView.backgroundColor = .green
@@ -51,7 +49,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         let tableView = UITableView(frame: self.view.frame)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset.top = blueViewHeight + redViewHeight + greenViewHeight
+        tableView.contentInset.top = totalHeight
         tableView.scrollIndicatorInsets.top = tableView.contentInset.top
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         return tableView
@@ -67,6 +65,12 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         view.addSubview(blueView)
         
         view.addSubview(greenView)
+        
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     var offset: CGPoint = .zero
@@ -79,18 +83,19 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         if offset == .zero { return }
         
-        let offsetY = scrollView.contentOffset.y + 44
+        let offsetY = scrollView.contentOffset.y
+        let totalHeight = self.totalHeight
         
         if offset.y < scrollView.contentOffset.y {
             // 向上滑
 
             if scrollView.contentOffset.y <= -greenViewHeight {
                 blueView.frame.origin.y = blueViewY
-                if offsetY >= -redViewY {
-                    blueView.frame.origin.y = max(blueViewY - redViewY - max(offsetY, -redViewY), -blueViewHeight)
+                if offsetY + totalHeight >= redViewHeight {
+                    blueView.frame.origin.y = blueViewY - (offsetY + totalHeight - redViewHeight)
                 }
-                
-                redView.frame.origin.y = max(redViewY - redViewOffsetY - max(offsetY, -redViewOffsetY), -redViewHeight)
+
+                redView.frame.origin.y = max(redViewY - (offsetY + totalHeight), -redViewY)
 
             } else {
                 blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
@@ -105,15 +110,23 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
                 blueView.frame.origin.y = blueViewY
             }
             redView.frame.origin.y = blueView.frame.maxY - redViewHeight
-            
+
             if scrollView.contentOffset.y <= -(redViewY + greenViewHeight) {
-                redView.frame.origin.y = redViewY - redViewOffsetY - max(offsetY, -redViewOffsetY)
+                redView.frame.origin.y = max(redViewY - (offsetY + totalHeight), -redViewY)
             }
         }
         
         greenView.frame.origin.y = redView.frame.maxY
 
         offset = scrollView.contentOffset
+    }
+    
+    func nearestTargetOffsetY(for offsetY: CGFloat) -> CGFloat {
+        return offsetY
+    }
+
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        targetContentOffset.pointee.y = nearestTargetOffsetY(for: targetContentOffset.pointee.y)
     }
     
     override func viewWillAppear(_ animated: Bool) {
