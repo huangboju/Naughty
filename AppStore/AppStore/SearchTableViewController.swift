@@ -93,7 +93,12 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 greenView.frame.origin.y = redView.frame.maxY
             } else {
-                
+                if blueView.frame.minY >= -blueViewHeight {
+                    blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
+                    blueView.frame.origin.y = min(-blueViewHeight, blueView.frame.minY)
+                    redView.frame.origin.y = blueView.frame.maxY - redViewHeight
+                    greenView.frame.origin.y = redView.frame.maxY
+                }
             }
 
         } else {
