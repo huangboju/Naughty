@@ -52,6 +52,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset.top = blueViewHeight + redViewHeight + greenViewHeight
+        tableView.scrollIndicatorInsets.top = tableView.contentInset.top
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         return tableView
     }()
