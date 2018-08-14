@@ -23,6 +23,7 @@
 		D8CE44161E30554400B796F7 /* Curry.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8CE44151E30554400B796F7 /* Curry.swift */; };
 		D8D6C36E1E30A72F00F60208 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8D6C36C1E30A72400F60208 /* SnapKit.framework */; };
 		D8D6C36F1E30A72F00F60208 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D8D6C36C1E30A72400F60208 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F70A65D92122E13200DC6EA9 /* SearchTableUpgradeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70A65D82122E13200DC6EA9 /* SearchTableUpgradeVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		D8CE44131E2F9D1400B796F7 /* AutoResizingHeaderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoResizingHeaderController.swift; sourceTree = "<group>"; };
 		D8CE44151E30554400B796F7 /* Curry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Curry.swift; sourceTree = "<group>"; };
 		D8D6C36C1E30A72400F60208 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		F70A65D82122E13200DC6EA9 /* SearchTableUpgradeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableUpgradeVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				D8CE44111E2F986400B796F7 /* HeaderView.swift */,
 				D8CE44131E2F9D1400B796F7 /* AutoResizingHeaderController.swift */,
 				BE1C79EC2102DC80009C3CBA /* SearchTableViewController.swift */,
+				F70A65D82122E13200DC6EA9 /* SearchTableUpgradeVC.swift */,
 			);
 			path = AppStore;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				D89697411D87F8EC00659030 /* ViewController.swift in Sources */,
 				D896973F1D87F8EC00659030 /* AppDelegate.swift in Sources */,
 				D8CE440E1E2F45A600B796F7 /* ThirdController.swift in Sources */,
+				F70A65D92122E13200DC6EA9 /* SearchTableUpgradeVC.swift in Sources */,
 				D8CE44141E2F9D1400B796F7 /* AutoResizingHeaderController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

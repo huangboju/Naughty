@@ -9,7 +9,8 @@ class ViewController: UIViewController {
     let controllers: [UIViewController.Type] = [
         AutoResizingHeaderController.self,
         ResizeTableHeaderViewAnimatedController.self,
-        SearchTableViewController.self
+        SearchTableViewController.self,
+        SearchTableUpgradeVC.self
     ]
     
     fileprivate lazy var tableView: UITableView = {

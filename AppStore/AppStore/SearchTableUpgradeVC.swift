@@ -1,4 +1,12 @@
 //
+//  SearchTableUpgradeVC.swift
+//  AppStore
+//
+//  Created by xiAo_Ju on 2018/8/14.
+//  Copyright © 2018 xiAo_Ju. All rights reserved.
+//
+
+//
 //  SearchTableViewController.swift
 //  AppStore
 //
@@ -8,7 +16,7 @@
 
 import UIKit
 
-class SearchTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SearchTableUpgradeVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var totalHeight: CGFloat {
         return blueViewHeight + redViewHeight + greenViewHeight + blueViewY
@@ -16,18 +24,18 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     private let blueViewY: CGFloat = 0
     private let blueViewHeight: CGFloat = 120
-
+    
     private lazy var blueView: UIView = {
         let blueView = UIView(frame: CGRect(x: 0, y: blueViewY, width: self.view.frame.width, height: blueViewHeight))
         blueView.backgroundColor = .blue
         return blueView
     }()
-
+    
     private var redViewY: CGFloat {
         return blueViewY + blueViewHeight
     }
     private let redViewHeight: CGFloat = 80
-
+    
     private lazy var redView: UIView = {
         let blueView = UIView(frame: CGRect(x: 0, y: redViewY, width: self.view.frame.width, height: redViewHeight))
         blueView.backgroundColor = .red
@@ -44,7 +52,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         greenView.backgroundColor = .green
         return greenView
     }()
-
+    
     fileprivate lazy var tableView: UITableView = {
         let tableView = UITableView(frame: self.view.frame)
         tableView.delegate = self
@@ -54,7 +62,7 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -74,11 +82,12 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     var offset: CGPoint = .zero
+    var velocity: CGPoint = .zero
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         offset = scrollView.contentOffset
     }
-
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if offset == .zero { return }
@@ -88,44 +97,42 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
         
         if offset.y < scrollView.contentOffset.y {
             // 向上滑
-
+            
             if scrollView.contentOffset.y <= -greenViewHeight {
                 blueView.frame.origin.y = blueViewY
                 if offsetY + totalHeight >= redViewHeight {
                     blueView.frame.origin.y = blueViewY - (offsetY + totalHeight - redViewHeight)
                 }
-
+                
                 redView.frame.origin.y = min(redViewY - (offsetY + totalHeight), redViewY)
-
+                
             } else {
                 blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
                 blueView.frame.origin.y = max(-blueViewHeight, blueView.frame.minY)
                 redView.frame.origin.y = blueView.frame.maxY - redViewHeight
             }
-
+            
         } else {
-
-            blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
-            if blueView.frame.minY >= blueViewY {
-                blueView.frame.origin.y = blueViewY
-            }
-            redView.frame.origin.y = blueView.frame.maxY - redViewHeight
-
-            if scrollView.contentOffset.y <= -(redViewY + greenViewHeight) {
-                redView.frame.origin.y = min(redViewY - (offsetY + totalHeight), redViewY)
+            if velocity.y <= -1 {
+                blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
+                if blueView.frame.minY >= blueViewY {
+                    blueView.frame.origin.y = blueViewY
+                }
+                redView.frame.origin.y = blueView.frame.maxY - redViewHeight
+                
+                if scrollView.contentOffset.y <= -(redViewY + greenViewHeight) {
+                    redView.frame.origin.y = min(redViewY - (offsetY + totalHeight), redViewY)
+                }
             }
         }
-
+        
         greenView.frame.origin.y = redView.frame.maxY
-
+        
         offset = scrollView.contentOffset
     }
     
-    func nearestTargetOffsetY(for offsetY: CGFloat) -> CGFloat {
-        return offsetY
-    }
-
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        self.velocity = velocity
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,17 +142,18 @@ class SearchTableViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 50
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
         cell.textLabel?.text = indexPath.description
         return cell
     }
-
+    
 }
+
