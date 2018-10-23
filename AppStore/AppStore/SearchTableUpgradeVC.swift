@@ -95,10 +95,10 @@ class SearchTableUpgradeVC: UIViewController, UITableViewDelegate, UITableViewDa
         let offsetY = scrollView.contentOffset.y
         let totalHeight = self.totalHeight
         
-        if offset.y < scrollView.contentOffset.y {
+        if offset.y < offsetY {
             // 向上滑
             
-            if scrollView.contentOffset.y <= -greenViewHeight {
+            if offsetY <= -greenViewHeight {
                 blueView.frame.origin.y = blueViewY
                 if offsetY + totalHeight >= redViewHeight {
                     blueView.frame.origin.y = blueViewY - (offsetY + totalHeight - redViewHeight)
@@ -107,14 +107,13 @@ class SearchTableUpgradeVC: UIViewController, UITableViewDelegate, UITableViewDa
                 redView.frame.origin.y = min(redViewY - (offsetY + totalHeight), redViewY)
                 
             } else {
-                blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
+                blueView.frame.origin.y += (offset.y - offsetY)
                 blueView.frame.origin.y = max(-blueViewHeight, blueView.frame.minY)
                 redView.frame.origin.y = blueView.frame.maxY - redViewHeight
             }
-            
         } else {
             if velocity.y <= -1 {
-                blueView.frame.origin.y += (offset.y - scrollView.contentOffset.y)
+                blueView.frame.origin.y += (offset.y - offsetY)
                 if blueView.frame.minY >= blueViewY {
                     blueView.frame.origin.y = blueViewY
                 }
