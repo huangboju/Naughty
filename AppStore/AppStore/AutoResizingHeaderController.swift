@@ -83,7 +83,7 @@ extension UIViewController {
      */
     func sizeHeaderToFit(_ tableView: UITableView) {
         if let headerView = tableView.tableHeaderView {
-            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            let height = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
             headerView.frame.size.height = height
             headerView.setNeedsLayout()
             headerView.layoutIfNeeded()
